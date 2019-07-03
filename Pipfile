@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ipython = "*"
+autopep8 = "*"
+pep8 = "*"
+flake8 = "*"
+pylint = "*"
+
+[packages]
+numpy = "*"
+matplotlib = "*"
+scipy = "*"
+python-speech-features = "*"
+
+[requires]
+python_version = "3.7"
