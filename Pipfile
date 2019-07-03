@@ -15,6 +15,7 @@ numpy = "*"
 matplotlib = "*"
 scipy = "*"
 python-speech-features = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.7"
