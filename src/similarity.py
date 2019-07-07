@@ -3,6 +3,7 @@ from math import sqrt
 
 
 def cross_correlation(x_array, y_array):
+    """Cross correlation: [-1,1]: [negative relation, positive relation]"""
     x_mean = x_array.mean()
     y_mean = y_array.mean()
 
@@ -18,7 +19,7 @@ def cross_correlation(x_array, y_array):
 
 
 def distance(x_array, y_array):
-    """Euclidean distance"""
+    """Euclidean distance: [0, X]: [similar, dissimilar]"""
     tmp = 0
     for x, y in zip(x_array, y_array):
         tmp += (x - y) ** 2
@@ -38,6 +39,11 @@ def self_similarity(arr, distance_func, normalize=False):
         max_ = matrix[0, 0]  # Diagonal has the highest value
         min_ = matrix.min()
 
-        matrix = (matrix - min_) / (max_ - min_) * 255
+        if max_ == 0:
+            # Case for euclidean distance
+            max_ = matrix.max()
+            matrix = 1 - (matrix - min_) / (max_ - min_)
+        else:
+            matrix = (matrix - min_) / (max_ - min_)
 
     return matrix

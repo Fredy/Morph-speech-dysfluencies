@@ -48,7 +48,7 @@ def vad(framed, percent_thr, nrg_thr=0, context=5):
     for i in range(n_frames):
         start = max(i - context, 0)
         end = min(i + context, n_frames - 1)
-        n_above_thr = np.sum(xnrgs[start:end] > nrg_thr)
+        n_above_thr = np.count_nonzero(xnrgs[start:end] > nrg_thr)
         n_total = end - start + 1
         xvad[i] = (n_above_thr / n_total) > percent_thr
     return xvad
@@ -80,6 +80,23 @@ def _get_speech_samples(framed, window_size, hop_size):
                 start = 0
     if start:
         ranges.append((start * hop_size, len(framed) * hop_size + window_size))
+
+    return np.array(ranges)
+
+def _get_speech_frames(framed):
+    """Return range of frames that contains speech"""
+    ranges = []
+    start = 0
+    for i, out in enumerate(framed):
+        if out:
+            if not start:
+                start = i
+        else:
+            if start:
+                ranges.append((start, i))
+                start = 0
+    if start:
+        ranges.append((start, len(framed)))
 
     return np.array(ranges)
 

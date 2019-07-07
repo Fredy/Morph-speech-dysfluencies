@@ -9,6 +9,7 @@ autopep8 = "*"
 pep8 = "*"
 flake8 = "*"
 pylint = "*"
+bandit = "*"
 
 [packages]
 numpy = "*"

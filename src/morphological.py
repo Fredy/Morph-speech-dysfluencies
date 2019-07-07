@@ -54,6 +54,20 @@ def dilation(img, struct_elem):
     return out
 
 
+def closing(img, struct_elem):
+    img = dilation(img, struct_elem)
+    img = erosion(img, struct_elem)
+
+    return img
+
+
+def opening(img, struct_elem):
+    img = erosion(img, struct_elem)
+    img = dilation(img, struct_elem)
+
+    return img
+
+
 if __name__ == "__main__":
     import os
     import cv2
