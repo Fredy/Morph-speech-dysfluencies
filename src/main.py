@@ -142,8 +142,8 @@ if __name__ == "__main__":
     #   all thresholds in default
 
     for idx, img in enumerate(matrices):
-        prolongation = Detector.prolongation(img, threshold_bin=0.73, idx=idx)
-        repetition = Detector.word_repetition(img, threshold_bin=0.68, idx=idx)
+        prolongation = Detector.prolongation(img, idx=idx)
+        repetition = Detector.word_repetition(img, idx=idx)
 
         if prolongation.any():
             # remove the bottom half (diagonal) of the matrix
