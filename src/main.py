@@ -129,7 +129,7 @@ if __name__ == "__main__":
     frames, ranges, rate = voice_activity_det(wav_file)
 
     matrices = similarities(frames, ranges, rate, feature_ext=mfcc,
-                            measure=cross_correlation)
+                            measure=distance, normalize=True)
     # - Distance:
     #   use normalize
     #   prolongation threshold: 0.73
