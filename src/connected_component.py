@@ -2,7 +2,7 @@ import numpy as np
 from collections import deque
 
 
-def con_component(img):
+def con_component(img, max_label=None):
     rows, cols = img.shape
     label = 1
     queue = deque()
@@ -36,7 +36,7 @@ def con_component(img):
                     neighbors.append((r, c - 1))
 
                 if right:
-                    neighbors.append((r, c+1))
+                    neighbors.append((r, c + 1))
 
                 if top and left:
                     neighbors.append((r - 1, c - 1))
@@ -57,11 +57,14 @@ def con_component(img):
 
             label += 1
 
+            if max_label is not None and label > max_label:
+                return labels
+
     return labels
 
 
 def _check_pixel(pos, img, labels):
-    """Check if pixel is foreground and doesnt has not label"""
+    """Check if pixel is foreground and doesnt has a label"""
     return img[pos] and not labels[pos]
 
 
@@ -124,4 +127,3 @@ if __name__ == "__main__":
     out = erosion(out, np.ones((40, 40), np.bool_))
     out = dilation(out, np.ones((40, 40), np.bool_))
     cv2.imwrite('res/final.jpg', out * 255)
-
